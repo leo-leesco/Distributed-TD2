@@ -1,7 +1,9 @@
 #include <mpi.h>
+#include <stdatomic.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DEBUG
 #define array_threshold 1000000
 
 int max(int *array, int len) {
@@ -67,6 +69,11 @@ int main(int argc, char *argv[]) {
   int n = min(N_machines, A / array_threshold + 1);
   int size, temp_max;
   while (A > array_threshold && rank < n) {
+#ifdef DEBUG
+    printf("P%d/%d, n_active = %d, #array = %d", rank, N_machines, n, A);
+    fflush(stdout);
+#endif
+
     size = slice(array, A, rank, n);
     temp_max = max(array, size);
     MPI_Scatter(&temp_max, 1, MPI_INT, array, n, MPI_INT, 0, MPI_COMM_WORLD);

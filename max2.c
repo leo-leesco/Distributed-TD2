@@ -68,6 +68,12 @@ int main(int argc, char *argv[]) {
   // be easier to simply work sequentially
   int n = min(N_machines, A / array_threshold + 1);
   int size, temp_max;
+
+#ifdef DEBUG
+  printf("P%d/%d, n_active = %d, #array = %d", rank, N_machines, n, A);
+  fflush(stdout);
+#endif
+
   while (A > array_threshold && rank < n) {
 #ifdef DEBUG
     printf("P%d/%d, n_active = %d, #array = %d", rank, N_machines, n, A);

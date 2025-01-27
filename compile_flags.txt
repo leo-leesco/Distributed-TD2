@@ -1,6 +1,0 @@
--g
--I$(brew --prefix)/include
--I$(brew --prefix)/Cellar/mpich/4.2.3/include
--L$(brew --prefix)/Cellar/mpich/4.2.3/lib
--lmpi
--lpmpi
